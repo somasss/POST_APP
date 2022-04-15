@@ -1,10 +1,10 @@
-<%= form_with(model: @posts, local: true) do |form| %>
-  <% if @posts.errors.any? %>
+<%= form_with(model: @post, local: true, url: choose_new_or_edit) do |form| %>
+  <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= @posts.errors.count %>件のエラーがあります。</h2>
+      <h2><%= @post.errors.count %>件のエラーがあります。</h2>
       <ul>
 
-      <% @posts.errors.full_messages.each do |msg| %>
+      <% @post.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

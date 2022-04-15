@@ -6,15 +6,19 @@ class PostsController < ApplicationController
   end
 
   def new
-    @posts = Post.new
+    @post = Post.new
   end
 
   def create
-    @posts = Post.create(post_params)
-    if @posts.save
-      redirect_to posts_path, notice: "投稿を作成しました！"
-    else
+    @post = Post.new(post_params)
+    if params[:back]
       render :new
+    else
+      if @post.save
+        redirect_to posts_path, notice: "投稿を作成しました！"
+      else
+        render :new
+      end
     end
   end
 
@@ -25,7 +29,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @posts.update(post_params)
+    if @post.update(post_params)
       redirect_to posts_path, notice: "投稿を編集しました！"
     else
       render :edit
@@ -33,8 +37,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @posts.destroy
+    @post.destroy
     redirect_to posts_path, notice:"投稿を削除しました！"
+  end
+
+  def confirm
+    @post = Post.new(post_params)
+    # render :new if @post.invalid?
   end
 
   private
@@ -44,7 +53,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @posts = Post.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
 
