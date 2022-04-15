@@ -25,14 +25,14 @@ class PostsController < ApplicationController
     @posts =  Post.find(params[:id])
   end
 
-  # def update
-  #   @posts = Post.find(params[:id])
-  #   if @posts.update(post_params)
-  #     redirect_to posts_path, notice: "投稿を編集しました！"
-  #   else
-  #     render :edit
-  #   end
-  # end
+  def update
+    @posts = Post.find(params[:id])
+    if @posts.update(post_params)
+      redirect_to posts_path, notice: "投稿を編集しました！"
+    else
+      render :edit
+    end
+  end
 
   private
 
